@@ -6,16 +6,10 @@ defmodule Solution do
       |> String.split("\n", trim: true)
       |> Enum.map(&String.to_integer/1)
       |> combinations(size)
-      |> Enum.filter(fn x -> Enum.sum(x) == 2020 end)
-      |> List.first 
+      |> Enum.find(fn x -> Enum.sum(x) == 2020 end)
       |> List.foldl(1, fn acc, x -> x * acc end)
   end 
 
-  def partOne() do
-    solve()
-  end
-
-  def partTwo() do
-    solve(3)
-  end
+  def partOne(), do: solve()
+  def partTwo(), do: solve(3)
 end
