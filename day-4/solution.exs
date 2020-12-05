@@ -9,11 +9,11 @@ defmodule Solution do
     |> Enum.map(fn x -> Enum.map(x, fn y -> String.split(y, ":", trim: true) end) end)
     |> Enum.map(fn x -> struct(Passport, Map.new(x, fn [k, v] -> {String.to_atom(k), v} end)) end)
 
-  def part_one() do
-    @data |> Enum.count(fn x -> x |> Map.values() |> Enum.all?(fn y -> y != nil end) end)
-  end
+  defp has_fields(passport), do: passport |> Map.values() |> Enum.all?(fn y -> y != nil end)
+
+  def part_one(), do: @data |> Enum.count(&has_fields/1)
 
   def part_two() do
-    nil
+
   end
 end
