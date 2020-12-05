@@ -6,14 +6,13 @@ defmodule Solution do
   defp validate_frequency(input) do
     [min, max, letter, password] = split_input(input)
     freq = password |> String.graphemes() |> Enum.frequencies() |> Map.get(letter)
-    freq >= String.to_integer(min) and freq <= String.to_integer(max) 
+    freq in String.to_integer(min)..String.to_integer(max)
   end
 
   defp validate_policy(input) do
-    [first, second, letter, password] = split_input(input)
-    first_letter = String.at(password, String.to_integer(first)-1)
-    second_letter = String.at(password, String.to_integer(second)-1)
-    (first_letter == letter or second_letter == letter) and first_letter != second_letter
+    [x, y, letter, password] = split_input(input)
+    [first, second] = [x, y] |> Enum.map(fn x -> String.at(password, String.to_integer(x)-1) end)
+    (first == letter or second == letter) and first != second
   end
 
   def part_one(), do: @data |> Enum.count(&validate_frequency/1) 
