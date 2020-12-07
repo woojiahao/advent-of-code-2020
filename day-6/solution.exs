@@ -3,8 +3,7 @@ defmodule Solution do
 
   def part_one() do
     load_data()
-    |> Enum.map(&String.split(&1, ~r{[\n|\s]}, trim: true))
-    |> Enum.map(&Enum.join(&1, ""))
+    |> Enum.map(&String.replace(&1, "\n", ""))
     |> Enum.map(&String.graphemes/1)
     |> Enum.map(&Enum.uniq/1)
     |> Enum.map(&Enum.count/1)
