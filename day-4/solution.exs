@@ -77,7 +77,6 @@ defmodule Solution do
   def part_two() do
     load_data()
     |> Enum.filter(&validate_fields(&1 |> Map.keys() |> Enum.sort()))
-    |> Enum.filter(&validate_fields_input(&1))
-    |> Enum.count()
+    |> Enum.count(&validate_fields_input(&1))
   end
 end
