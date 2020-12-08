@@ -32,6 +32,7 @@ defmodule Solution do
   end
 
   def print_seats() do
+    # TODO Create visualisation tool that helps find answer
     for row <- 0..127 do
       for col <- 0..7 do
         if (row * 8 + col) in seat_ids() do
