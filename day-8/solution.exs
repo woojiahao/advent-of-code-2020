@@ -38,8 +38,7 @@ defmodule Solution do
       data
       |> Stream.with_index()
       |> Enum.filter(fn {[op, _], _} -> op in ~w(jmp nop) end)
-      |> Enum.map(fn {_, i} -> i end)
-      |> Enum.map(fn i ->
+      |> Enum.map(fn {_, i} ->
         [op, arg] = Enum.at(data, i)
 
         case op do
