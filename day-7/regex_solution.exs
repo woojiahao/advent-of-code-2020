@@ -65,12 +65,12 @@ defmodule RegexSolution do
         # If the current bag contains some other bags
         # Get the list of bags they contain
         # Drill down to the last bag and get the total of the bags
-        children =
-          bags[target]
-          |> Enum.map(fn {b, q} -> List.duplicate(b, q) end)
-          |> List.flatten()
-
-        1 + (children |> Enum.map(&search_children(bags, &1)) |> Enum.sum())
+        1 +
+          (bags[target]
+           |> Enum.map(fn {b, q} -> List.duplicate(b, q) end)
+           |> List.flatten()
+           |> Enum.map(&search_children(bags, &1))
+           |> Enum.sum())
     end
   end
 
