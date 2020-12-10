@@ -2,15 +2,20 @@ defmodule Solution do
   @data File.read!("data.txt") |> String.split("\n", trim: true)
 
   defp is_tree(row, i, right, down) do
-    raw_col = Stream.cycle(0..String.length(row)-1) |> Enum.take(div(i, down)*right) |> List.last()
-    col = if raw_col+1 == String.length(row), do: 0, else: raw_col+1
+    raw_col =
+      Stream.cycle(0..(String.length(row) - 1))
+      |> Enum.take(div(i, down) * right)
+      |> List.last()
+
+    col = if raw_col + 1 == String.length(row), do: 0, else: raw_col + 1
     row |> String.graphemes() |> Enum.at(col) == "#"
   end
 
   defp traverse(rows, right, down) do
-    Enum.zip(1..length(rows), rows)
-      |> Enum.filter(fn {i, _} -> rem(i, down) == 0 end)
-      |> Enum.count(fn {i, row} -> is_tree(row, i, right, down) end)
+    1..length(rows)
+    |> Enum.zip(rows)
+    |> Enum.filter(&(rem(elem(&1, 0), down) == 0))
+    |> Enum.count(fn {i, row} -> is_tree(row, i, right, down) end)
   end
 
   def part_one() do
