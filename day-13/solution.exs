@@ -41,6 +41,7 @@ defmodule Solution do
 
   defp solve!({_, buses}) do
     n_i = buses |> Enum.map(&elem(&1, 1))
+    # Set the remainder to be bus_id - index
     a_i = buses |> Enum.map(&elem(&1, 0))
     y = n_i |> List.foldl(1, fn x, acc -> acc * x end)
     y_i = n_i |> Enum.map(&div(y, &1))
