@@ -78,12 +78,16 @@ defmodule Solution do
     addr = i |> Integer.digits(2) |> pad(36, 0) |> apply_mask!(mask)
     val = v |> Integer.undigits(2)
 
+    # Find the indices of all floating bits
     floating_indices =
       addr
       |> Stream.with_index()
       |> Enum.filter(&(elem(&1, 0) == "X"))
       |> Enum.map(&elem(&1, 1))
 
+    # Generate the bit permutations for the number of floating bits
+    # E.g. # of floating bits = 2
+    # [0, 0], [0, 1], [1, 0], [1, 1]
     bit_perms =
       0..trunc(:math.pow(2, length(floating_indices)) - 1)
       |> Enum.map(&pad(Integer.digits(&1, 2), length(floating_indices), 0))
@@ -95,6 +99,7 @@ defmodule Solution do
         |> Map.new()
       end)
 
+    # For each bit permutation, apply the bit permutation to the floating bits based on position and retrieve the decimal value of the new memory address
     target_addrs =
       bit_perms
       |> Enum.map(fn perm ->
@@ -107,6 +112,7 @@ defmodule Solution do
       end)
       |> Enum.map(&Integer.undigits(&1, 2))
 
+    # Generate a map of the memory addresses and the new value to set
     target_mem =
       target_addrs
       |> Enum.zip(List.duplicate(val, length(target_addrs)))
