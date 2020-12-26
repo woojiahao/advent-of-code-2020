@@ -1,0 +1,9 @@
+{q_i} := quotients
+{r_i} := remainders, where r_0 := a and r_1 := b
+{s_i} := coefficient of a at i
+{t_i} := coefficient of b at i
+
+r_i = (s_i-2 - s_i-1 * q_i) * a + (t_i-2 - t_i-1 * q_i) * b
+Based on the previous equation, we can actually derive the value of s_i and t_i from previous values, thus allowing us to compute the coefficients without worrying about "expanding the values"
+
+
