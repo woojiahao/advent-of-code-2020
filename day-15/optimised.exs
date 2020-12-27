@@ -22,22 +22,5 @@ defmodule Optimised do
     data = load_data()
     [last | rest] = data |> Enum.reverse()
     solve(gen_positions(rest |> Enum.reverse()), last, length(rest), 30_000_000)
-
-    # solve(positions, {data |> List.last(), length(data) - 1}, 10)
-
-    # [
-    #   [0, 3, 6],
-    #   [1, 3, 2],
-    #   [2, 1, 3],
-    #   [1, 2, 3],
-    #   [2, 3, 1],
-    #   [3, 2, 1],
-    #   [3, 1, 2]
-    # ]
-    # |> Enum.map(fn d ->
-    #   [last | rest] = d |> Enum.reverse()
-    #   d! = rest |> Enum.reverse()
-    #   solve(gen_positions(d!), last, length(d!), 2020)
-    # end)
   end
 end
