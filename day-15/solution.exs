@@ -12,8 +12,8 @@ defmodule Solution do
   defp rfind(lst, v, i) do
     {_, pos} =
       lst
-      |> Enum.with_index()
-      |> Enum.filter(fn {a, _i} -> a == v end)
+      |> Stream.with_index()
+      |> Stream.filter(fn {a, _i} -> a == v end)
       |> Enum.reverse()
       |> Enum.at(i - 1)
 
@@ -36,5 +36,10 @@ defmodule Solution do
   def part_one() do
     data = load_data()
     data |> solve(length(data), 2020)
+  end
+
+  def part_two() do
+    data = load_data()
+    data |> solve(length(data), 30_000_000)
   end
 end
